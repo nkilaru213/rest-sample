@@ -1,0 +1,41 @@
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hoopladigital.mapper.PersonMapper">
+
+	<select id="getPersonList" resultType="Person">
+		select
+			id,
+			firstName,
+			middleName,
+			lastName
+		from Person
+		order by id
+	</select>
+	<select id="getPersonById" parameterType="Long" resultType="Person">
+		select
+			id,
+			firstName,
+			middleName,
+			lastName
+		from Person p
+		where id = #{id}
+	</select>
+	<insert
+		  id="addPerson"
+		  parameterType="com.hoopladigital.bean.Person">
+		 insert into person (firstname, middlename, lastname) values (#{firstName}, #{middleName}, #{lastName})
+  	</insert>
+  	<update id="updatePerson" parameterType="com.hoopladigital.bean.Person">
+ 		 update Person set
+    	firstName = #{firstName},
+    	middleName = #{middleName},
+    	lastName = #{lastName}
+  		where id = #{id}
+	</update>
+
+	<delete id="deletePerson" parameterType="Long">
+	  delete from Person where id = #{id}
+	</delete>
+</mapper>

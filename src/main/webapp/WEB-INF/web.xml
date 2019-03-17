@@ -1,0 +1,27 @@
+<web-app>
+
+	<display-name>media web services</display-name>
+
+	<servlet>
+		<servlet-name>resteasy</servlet-name>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>resteasy</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>com.hoopladigital.guice.GuiceContextListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>resteasy.guice.modules</param-name>
+		<param-value>
+			com.hoopladigital.guice.GuiceModule,
+			com.hoopladigital.guice.SampleMyBatisModule
+		</param-value>
+	</context-param>
+
+</web-app>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<contextName>rest-sample</contextName>
+
+	<jmxConfigurator />
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- leaving this here as an example -->
+	<!--<logger name="com.hoopladigital" level="TRACE"/>-->
+	<logger name="com.hoopladigital.mapper.PersonMapper" level="TRACE"/>
+
+	<root level="DEBUG">
+		<appender-ref ref="console"/>
+	</root>
+
+</configuration>

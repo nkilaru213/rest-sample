@@ -1,0 +1,363 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.hoopladigital</groupId>
+	<artifactId>rest-sample</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>rest-sample</name>
+	<url>http://www.hoopladigital.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<version.label>${project.version}-${maven.build.timestamp}</version.label>
+
+		<aws-java-sdk.version>1.11.337</aws-java-sdk.version>
+		<aws-xray-recorder.version>1.3.1</aws-xray-recorder.version>
+		<jaxrs-api.version>3.0.12.Final</jaxrs-api.version>
+		<resteasy.version>3.0.24.Final</resteasy.version>
+		<slf4j-api.version>1.7.25</slf4j-api.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- resteasy -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-servlet-initializer</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>jaxrs-api</artifactId>
+			<version>${jaxrs-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-guice</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+
+		<!-- guice -->
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-multibindings</artifactId>
+			<version>3.0</version>
+		</dependency>
+
+		<!-- @Nonnull and @Nullable annotations -->
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dillonsoftware</groupId>
+			<artifactId>ds-commons</artifactId>
+			<version>1.7</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.20</version>
+		</dependency>
+
+		<!-- AWS xray bits -->
+		<dependency>
+			<groupId>com.dillonsoftware</groupId>
+			<artifactId>ds-xray</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-core</artifactId>
+			<version>${aws-java-sdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-xray-recorder-sdk-core</artifactId>
+			<version>${aws-xray-recorder.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-xray-recorder-sdk-aws-sdk-instrumentor</artifactId>
+			<version>${aws-xray-recorder.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-xray-recorder-sdk-apache-http</artifactId>
+			<version>${aws-xray-recorder.version}</version>
+		</dependency>
+
+		<!-- mybatis and related dependencies -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-guice</artifactId>
+			<!-- todo: upgrade to 3.10 - this will require guice 4.x -->
+			<version>3.9</version>
+		</dependency>
+
+		<!-- Servlet API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!--logging-->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j-api.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- bean validation -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-validator-provider-11</artifactId>
+			<version>3.0.24.Final</version>
+		</dependency>
+
+		<!-- common media bits -->
+		<dependency>
+			<groupId>com.hoopladigital</groupId>
+			<artifactId>video-shared</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+
+		<!-- derby -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.14.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbynet</artifactId>
+			<version>10.14.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbytools</artifactId>
+			<version>10.14.2.0</version>
+		</dependency>
+
+		<!-- testing components -->
+		<dependency>
+			<groupId>com.hoopladigital</groupId>
+			<artifactId>test-components</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>${version.label}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.0</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<configLocation>https://raw.githubusercontent.com/DillonSoftware/ds-config/1.0.2/checkstyle.xml</configLocation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20.1</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.9.5</version>
+			</plugin>
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m5.1</version>
+				<configuration>
+					<flowInitContext>
+						<masterBranchName>master</masterBranchName>
+						<developBranchName>develop</developBranchName>
+						<featureBranchPrefix>feature/</featureBranchPrefix>
+						<releaseBranchPrefix>release/</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+						<versionTagPrefix />
+					</flowInitContext>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<rulesUri>https://raw.githubusercontent.com/DillonSoftware/ds-config/1.0.2/update-rules.xml</rulesUri>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<!-- select non-aggregate reports -->
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.20.1</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<configLocation>https://raw.githubusercontent.com/DillonSoftware/ds-config/1.0.2/checkstyle.xml</configLocation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<repositories>
+		<repository>
+			<id>jboss</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>dillonsoftware.release</id>
+			<url>http://maven.dillonsoftware.com/release</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>dillonsoftware.snapshot</id>
+			<url>http://maven.dillonsoftware.com/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<prerequisites>
+		<maven>3.5</maven>
+	</prerequisites>
+
+</project>

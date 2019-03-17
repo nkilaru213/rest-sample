@@ -1,0 +1,23 @@
+{
+	"globalSettings": {
+		"mybatis.pooled.maximumActiveConnections": 5,
+		"mybatis.pooled.maximumIdleConnections": 2,
+		"JDBC.driver": "org.apache.derby.jdbc.EmbeddedDriver",
+		"initialize_database": true,
+		"JDBC.url": "jdbc:derby:memory:sample;create=true",
+		"version": "${project.version}-${timestamp}"
+	},
+	"environmentSettings": {
+		"LOCAL": {
+		},
+		"DEV": {
+		},
+		"TEST": {
+		},
+		"PROD": {
+		}
+	},
+	"requiredSettings": [
+		"JDBC.url"
+	]
+}
