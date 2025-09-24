@@ -71,5 +71,34 @@ node server.js
 
 
 
+// Retrieve PKCE verifier (you must have saved it in sessionStorage or somewhere persistent)
+  const codeVerifier = "89"; // replace with your generated one
 
+  const tokenUrl = "token.oauth2";
+
+  try {
+    const body = new URLSearchParams({
+      grant_type: "authorization_code",
+      code: code,
+      redirect_uri: "https://localhost:8080",
+      client_id: "124RT",  // replace with your actual client_id
+      code_verifier: codeVerifier
+    });
+
+    const tokenResponse = await fetch(tokenUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: body.toString()
+    });
+
+    const tokenData = await tokenResponse.json();
+    console.log("🔑 Token Response:", tokenData);
+
+    res.json(tokenData);
+  } catch (err) {
+    console.error("❌ Error exchanging code:", err);
+    res.status(500).send("Token exchange failed");
+  }
 
